@@ -1,0 +1,1007 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Charles Livingston — Indiana University Mathematics</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap"
+        rel="stylesheet">
+    <style>
+        :root {
+            --crimson: #8B1A1A;
+            --crimson-lt: #a52a2a;
+            --ink: #1a1612;
+            --ink-soft: #3d3530;
+            --parchment: #faf7f0;
+            --cream: #f3ede0;
+            --rule: #c8b89a;
+            --rule-lt: #e0d5c0;
+        }
+
+        *,
+        *::before,
+        *::after {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            background: var(--parchment);
+            color: var(--ink);
+            font-family: 'Inter', system-ui, sans-serif;
+            font-size: 17px;
+            line-height: 1.7;
+        }
+
+        /* ── HEADER ── */
+        header {
+            background: var(--cream);
+            border-left: 4px solid var(--crimson);
+            border-bottom: 1px solid var(--rule);
+            padding: 2rem 3rem 1.8rem;
+            display: flex;
+            align-items: flex-start;
+            gap: 2rem;
+        }
+
+        header .photo-slot {
+            flex-shrink: 0;
+            width: 159px;
+            height: 159px;
+            border-radius: 3px;
+            border: 1px solid var(--rule);
+            overflow: hidden;
+            background: var(--rule-lt);
+        }
+
+        header .photo-slot img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        header .info {
+            flex: 1;
+        }
+
+        header h1 {
+            font-family: 'Inter', system-ui, sans-serif;
+            font-weight: 500;
+            font-size: 2rem;
+            letter-spacing: -.01em;
+            color: var(--ink);
+            line-height: 1.15;
+            margin-bottom: .5rem;
+        }
+
+        header .title-block {
+            font-size: .97rem;
+            color: var(--ink-soft);
+            line-height: 1.7;
+        }
+
+        header .title-block a {
+            color: var(--crimson);
+            text-decoration: none;
+        }
+
+        header .title-block a:hover {
+            text-decoration: underline;
+        }
+
+        /* ── NAV ── */
+        nav {
+            background: #f0e8d8;
+            border-bottom: 1px solid var(--rule);
+            display: flex;
+        }
+
+        nav a {
+            color: var(--ink-soft);
+            text-decoration: none;
+            padding: .55rem 1.2rem;
+            font-size: .88rem;
+            border-right: 1px solid var(--rule-lt);
+            transition: background .2s, color .2s;
+        }
+
+        nav a:hover {
+            background: var(--cream);
+            color: var(--crimson);
+        }
+
+        /* ── PAGE BODY ── */
+        .page-body {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 0 2rem 3rem;
+        }
+
+        /* ── SECTION TITLES ── */
+        .section-head {
+            font-family: 'Inter', system-ui, sans-serif;
+            font-weight: 600;
+            font-size: 1.4rem;
+            color: #6b1212;
+            letter-spacing: .02em;
+            border-bottom: 1.5px solid var(--rule);
+            padding-bottom: .25rem;
+            margin: 1.4rem 0 .8rem;
+        }
+
+        /* ── PROFILE SECTION ── */
+        #profile {
+            padding-top: 1rem;
+        }
+
+        .link-list {
+            list-style: none;
+        }
+
+        .link-list li {
+            padding: .35rem 0;
+            border-bottom: 1px solid var(--rule-lt);
+            line-height: 1.45;
+        }
+
+        .link-list li:last-child {
+            border-bottom: none;
+        }
+
+        .link-list a {
+            color: var(--crimson);
+            text-decoration: none;
+            font-weight: 500;
+        }
+
+        .link-list a:hover {
+            text-decoration: underline;
+        }
+
+        .link-list .desc {
+            font-size: .88rem;
+            color: var(--ink-soft);
+            margin-top: .12rem;
+        }
+
+        /* ── PUBLICATIONS ── */
+        #publications {
+            padding-top: 0;
+        }
+
+        .pub-section-label {
+            font-family: 'Inter', system-ui, sans-serif;
+            font-size: 1.15rem;
+            font-weight: 600;
+            color: var(--ink);
+            margin: 1.2rem 0 .5rem;
+            padding: .25rem .75rem;
+            background: var(--cream);
+            border-left: 3px solid var(--crimson);
+            letter-spacing: .02em;
+        }
+
+        .pub-table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        .pub-table tr {
+            vertical-align: top;
+        }
+
+        .pub-table td {
+            padding: .4rem .35rem;
+        }
+
+        .pub-table .num {
+            width: 3rem;
+            text-align: right;
+            padding-right: .75rem;
+            color: var(--crimson);
+            font-variant-numeric: tabular-nums;
+            font-size: .88rem;
+            opacity: .65;
+            white-space: nowrap;
+        }
+
+        .pub-table .entry {
+            font-size: .95rem;
+            line-height: 1.55;
+        }
+
+        .pub-table .entry b {
+            font-weight: 600;
+        }
+
+        .pub-table .entry a {
+            color: var(--crimson-lt);
+            text-decoration: none;
+            font-size: .84rem;
+            margin-left: .2em;
+            border-bottom: 1px solid transparent;
+            transition: border-color .15s;
+        }
+
+        .pub-table .entry a:hover {
+            border-color: var(--crimson-lt);
+        }
+
+        .pub-table tr:nth-child(even) td {
+            background: rgba(200, 184, 154, .08);
+        }
+
+        hr.pub-divider {
+            border: none;
+            border-top: 1px solid var(--rule);
+            margin: 1.5rem 0;
+        }
+
+        @media (max-width: 640px) {
+            header {
+                flex-direction: column;
+                padding: 1.4rem;
+                border-left: none;
+                border-top: 3px solid var(--crimson);
+            }
+
+            .page-body {
+                padding: 0 1rem 3rem;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <header>
+        <div class="photo-slot">
+            <img src="livingst.jpg" alt="Charles Livingston" />
+        </div>
+        <div class="info">
+            <h1>Charles Livingston</h1>
+            <div class="title-block">
+                Professor Emeritus of Mathematics<br>
+                Indiana University, Bloomington<br>
+                <a href="mailto:livingst@iu.edu">livingst@iu.edu</a>
+            </div>
+        </div>
+    </header>
+
+    <nav>
+        <a href="#profile">Home</a>
+        <a href="#publications">Publications</a>
+        <a href="https://knotinfo.math.indiana.edu" target="_blank" rel="noopener">KnotInfo</a>
+        <a href="http://www.math.indiana.edu/" target="_blank" rel="noopener">IU Mathematics</a>
+    </nav>
+
+    <div class="page-body">
+
+        <section id="profile">
+            <h2 class="section-head">Projects &amp; Resources</h2>
+            <ul class="link-list">
+                <li>
+                    <a href="https://knotinfo.math.indiana.edu" target="_blank" rel="noopener">KnotInfo</a> &amp;
+                    <a href="https://linkinfo.sitehost.iu.edu/" target="_blank" rel="noopener">LinkInfo</a>
+                    <div class="desc">Tables of knot and link invariants, maintained with Allison Moore.</div>
+                </li>
+                <li>
+                    <a href="http://livingst.pages.iu.edu/concordancecalculator/concordance_calculator.html">Knot
+                        Concordance Calculator</a>
+                    <div class="desc">Expresses any linear combination of low crossing number knots in terms of an
+                        independent set, and computes the algebraic and geometric order in the concordance group. Built
+                        by Julia Collins.</div>
+                </li>
+                <li>
+                    <a href="Fox-Milnor-1957-BAMS-pg402.pdf">Fox&ndash;Milnor (1957)</a>
+                    <div class="desc">Fox and Milnor&rsquo;s announcement concerning the knot concordance group.
+                        <em>Bull. AMS</em>, 1957, p.&nbsp;402.
+                    </div>
+                </li>
+                <li>
+                    <a href="Knot_T_home.html">Knot Theory: Carus Monograph</a>
+                    <div class="desc">Information concerning my book on knot theory in the MAA Carus Monograph Series.
+                    </div>
+                </li>
+            </ul>
+        </section>
+
+        <section id="publications">
+            <h2 class="section-head">Publications</h2>
+
+            <div class="pub-section-label">Preprints</div>
+            <table class="pub-table">
+                <tr>
+                    <td class="num">2.</td>
+                    <td class="entry"><b>Knot primality: knot Floer homology, metacyclic representations and twisted
+                            homology</b>, joint with Samantha Allen. <a
+                            href="https://arxiv.org/abs/2508.08102">arXiv</a></td>
+                </tr>
+                <tr>
+                    <td class="num">1.</td>
+                    <td class="entry"><b>Using knot Floer invariants to detect prime knots</b>, joint with Samantha
+                        Allen, Misha Temkin, and C.-M. Michael Wong. <a
+                            href="https://arxiv.org/abs/2311.11089">arXiv</a></td>
+                </tr>
+            </table>
+
+            <hr class="pub-divider">
+            <div class="pub-section-label">Published and Accepted Articles</div>
+            <table class="pub-table">
+                <tr>
+                    <td class="num">101.</td>
+                    <td class="entry"><b>Signed clasp numbers and four-genus bounds</b>. <a
+                            href="https://arxiv.org/abs/2206.10432">arXiv</a>. To appear, <em>New York Journal of
+                            Math.</em></td>
+                </tr>
+                <tr>
+                    <td class="num">100.</td>
+                    <td class="entry"><b>An Upsilon torsion function for knot Floer homology</b>, joint with Samantha
+                        Allen. To appear, <em>Math. Research Letters</em>. <a
+                            href="https://arxiv.org/abs/2208.04768">arXiv</a></td>
+                </tr>
+                <tr>
+                    <td class="num">99.</td>
+                    <td class="entry"><b>Rank-expanding satellite operators on the topological knot concordance
+                            group</b>. <a href="https://arxiv.org/abs/2211.04272">arXiv</a>. To appear, <em>Michigan
+                            Journal of Mathematics</em>.</td>
+                </tr>
+                <tr>
+                    <td class="num">98.</td>
+                    <td class="entry"><b>Cobordism distance on the projective space of the knot concordance group</b>,
+                        <em>Canadian Journal of Mathematics</em> 76 (2024) 1267&ndash;1288. <a
+                            href="https://doi.org/10.4153/S0008414X23000408">Reprint</a> <a
+                            href="https://arxiv.org/abs/2107.08992">arXiv</a>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="num">97.</td>
+                    <td class="entry"><b>Connected sums of codimension two locally flat submanifolds</b>, <em>Proc. Roy.
+                            Soc. Edinburgh Sect. A</em> 154 (2024), 1937&ndash;1944. <a
+                            href="https://arxiv.org/abs/2104.03930">arXiv</a></td>
+                </tr>
+                <tr>
+                    <td class="num">96.</td>
+                    <td class="entry"><b>Branched covers and rational homology balls</b>, <em>Algebraic and Geometric
+                            Topology</em> 24-1 (2024), 587&ndash;594. <a
+                            href="https://arxiv.org/abs/2202.06713">arXiv</a></td>
+                </tr>
+                <tr>
+                    <td class="num">95.</td>
+                    <td class="entry"><b>Critical point counts in knot cobordisms: abelian and metacyclic
+                            invariants</b>, <em>Trans. AMS</em> (2023), 171&ndash;200. <a
+                            href="https://arxiv.org/abs/2106.16007">arXiv</a></td>
+                </tr>
+                <tr>
+                    <td class="num">94.</td>
+                    <td class="entry"><b>Intrinsic symmetry groups of links</b>, <em>Algebraic and Geometric
+                            Topology</em> 23 (2023) 2347&ndash;2368. <a
+                            href="https://arxiv.org/abs/2110.03502">arXiv</a></td>
+                </tr>
+                <tr>
+                    <td class="num">93.</td>
+                    <td class="entry"><b>Knot reversal and mutation act non-trivially on the concordance group of
+                            topologically slice knots</b>, <em>Selecta Mathematica</em> 28, Article 38 (2022). Joint
+                        with Taehee Kim. <a href="https://arxiv.org/abs/1904.12014">arXiv</a></td>
+                </tr>
+                <tr>
+                    <td class="num">92.</td>
+                    <td class="entry"><b>The cobordism distance between a knot and its reverse</b>, <em>Proc. Amer.
+                            Math. Soc.</em> 150 (2022), 1811&ndash;1819. <a
+                            href="https://arxiv.org/abs/2011.12287">arXiv</a></td>
+                </tr>
+                <tr>
+                    <td class="num">91.</td>
+                    <td class="entry"><b>Null-homologous unknottings</b>, <em>IRMA Lectures in Mathematics and
+                            Theoretical Physics</em> Vol. 33 (2021), 59&ndash;68. <a
+                            href="https://arxiv.org/abs/1902.12014">arXiv</a></td>
+                </tr>
+                <tr>
+                    <td class="num">90.</td>
+                    <td class="entry"><b>Primary decompositions of knot concordance</b>, <em>New York J. of Math.</em>
+                        27 (2021), 776&ndash;786. <a href="https://arxiv.org/abs/1911.08280">arXiv</a></td>
+                </tr>
+                <tr>
+                    <td class="num">89.</td>
+                    <td class="entry"><b>Chiral smoothings of knots</b>, <em>Proc. Edin. Math. Soc.</em> 63 (2020),
+                        1048&ndash;1061. <a href="https://arxiv.org/abs/1809.07619">arXiv</a></td>
+                </tr>
+                <tr>
+                    <td class="num">88.</td>
+                    <td class="entry"><b>Unknotting with a single twist</b>, <em>L&rsquo;Enseignement
+                            Math&eacute;matique</em> 66 (2020) 541&ndash;589. Joint with Samantha Allen. <a
+                            href="https://arxiv.org/abs/2005.10717">arXiv</a></td>
+                </tr>
+                <tr>
+                    <td class="num">87.</td>
+                    <td class="entry"><b>Signature invariants related to the unknotting number</b>, <em>Pac. J.
+                            Math.</em> 305 (2020), 229&ndash;250. <a href="https://arxiv.org/abs/1710.10530">arXiv</a>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="num">86.</td>
+                    <td class="entry"><b>Signature functions of knots</b>, <em>Proc. Amer. Math. Soc.</em> 146 (2018),
+                        4513&ndash;4520. <a href="http://arxiv.org/abs/1709.00732">arXiv</a></td>
+                </tr>
+                <tr>
+                    <td class="num">85.</td>
+                    <td class="entry"><b>Secondary Upsilon invariants of knots</b>, <em>Quarterly Journal of
+                            Mathematics</em> 69 (2018) 799&ndash;813. Joint with Se-Goo Kim. <a
+                            href="http://arxiv.org/abs/1610.05343">arXiv</a></td>
+                </tr>
+                <tr>
+                    <td class="num">84.</td>
+                    <td class="entry"><b>The four-genus of connected sums of torus knots</b>, <em>Math. Proc. Cambridge
+                            Phil. Soc.</em> 164 (2018) 531&ndash;550. Joint with Cornelia Van Cott. <a
+                            href="http://arxiv.org/abs/1508.01455">arXiv</a></td>
+                </tr>
+                <tr>
+                    <td class="num">83.</td>
+                    <td class="entry"><b>Concordances from connected sums of torus knots to L-space knots</b>, <em>New
+                            York J. of Math.</em> 24 (2018) 233&ndash;239. <a
+                            href="http://nyjm.albany.edu/j/2018/24-12.html">Reprint</a> <a
+                            href="http://arxiv.org/abs/1707.06490">arXiv</a></td>
+                </tr>
+                <tr>
+                    <td class="num">82.</td>
+                    <td class="entry"><b>Splitting numbers of links and the four-genus</b>, <em>Proc. Amer. Math.
+                            Soc.</em> 146 (2018) 421&ndash;427. <a
+                            href="Livingston_papers/2018_splitting_numbers.pdf">Reprint</a> <a
+                            href="http://arxiv.org/abs/1609.04353">arXiv</a></td>
+                </tr>
+                <tr>
+                    <td class="num">81.</td>
+                    <td class="entry"><b>Plane algebraic curves of arbitrary genus via Heegaard Floer homology</b>,
+                        <em>Comment. Math. Helvetici</em> 92 (2017) 215&ndash;256. Joint with Maciej Borodzik and Matt
+                        Hedden. <a href="http://arxiv.org/abs/1409.2111">arXiv</a>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="num">80.</td>
+                    <td class="entry"><b>Knot concordance and alternating knots</b>, <em>Mich. Math. J.</em> 66 (2017)
+                        421&ndash;432. Joint with Stefan Friedl and Raphael Zentner. <a
+                            href="http://arxiv.org/abs/1512.08414">arXiv</a></td>
+                </tr>
+                <tr>
+                    <td class="num">79.</td>
+                    <td class="entry"><b>Notes on the knot concordance invariant Upsilon</b>, <em>Algebraic and
+                            Geometric Topology</em> 17 (2017) 111&ndash;130. <a
+                            href="http://arxiv.org/abs/1412.0254">arXiv</a> <a
+                            href="https://msp.org/agt/2017/17-1/agt-v17-n1-p05-s.pdf">AGT</a></td>
+                </tr>
+                <tr>
+                    <td class="num">78.</td>
+                    <td class="entry"><b>Signature Jumps and Alexander Polynomials for Links</b>, <em>Proc. AMS</em> 144
+                        (2016) 5407&ndash;5417. Joint with Pat Gilmer. <a
+                            href="http://arxiv.org/abs/1508.04394">arXiv</a> <a
+                            href="Livingston_papers/2016_Signature_jumps.pdf">Reprint</a></td>
+                </tr>
+                <tr>
+                    <td class="num">77.</td>
+                    <td class="entry"><b>Semigroups, d-invariants and deformations of cuspidal singular points of plane
+                            curves</b>, joint with Maciej Borodzik. <em>J. London Math. Soc.</em> 93 (2016),
+                        439&ndash;463. <a href="http://arxiv.org/abs/1305.2868">arXiv</a></td>
+                </tr>
+                <tr>
+                    <td class="num">76.</td>
+                    <td class="entry"><b>Topologically slice knots of smooth concordance order two</b>, joint with Matt
+                        Hedden and Se-Goo Kim. <em>J. Differential Geometry</em> 102 (2016), 353&ndash;393. <a
+                            href="Livingston_papers/2016_Topologically slice knots of smooth concordance order two.pdf">Reprint</a>
+                        <a href="http://arxiv.org/abs/1212.6628">arXiv</a>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="num">75.</td>
+                    <td class="entry"><b>Doubly slice knots with low crossing number</b>, joint with Jeff Meier. <em>New
+                            York Journal of Mathematics</em> 21 (2015), 1008&ndash;1026. <a
+                            href="http://nyjm.albany.edu/j/2015/21-47.html">Reprint</a> <a
+                            href="http://arxiv.org/abs/1504.03368">arXiv</a></td>
+                </tr>
+                <tr>
+                    <td class="num">74.</td>
+                    <td class="entry"><b>The concordance classification of low crossing number knots</b>, joint with
+                        Julia Collins and Paul Kirk. <em>Proc. AMS</em> (2015), 4525&ndash;4536. <a
+                            href="http://dx.doi.org/10.1090/proc/12587">Published</a> <a
+                            href="http://arxiv.org/abs/1309.7252">arXiv</a> <a
+                            href="Livingston_papers/2015_The Concordance Classification of Low Crossing Number Knots.pdf">Reprint</a>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="num">73.</td>
+                    <td class="entry"><b>Heegaard Floer homology and rational cuspidal curves</b>, <em>Forum of
+                            Mathematics, Sigma</em> 2 (2014), 23 pages. Joint with Maciej Borodzik. <a
+                            href="http://arxiv.org/abs/1304.1062">arXiv</a></td>
+                </tr>
+                <tr>
+                    <td class="num">72.</td>
+                    <td class="entry"><b>Non-splittability of the rational homology cobordism group</b>, <em>Pac. J.
+                            Math.</em> 271 (2014) 183&ndash;211. Joint with Se-Goo Kim. <a
+                            href="https://arxiv.org/abs/1211.3712">arXiv</a></td>
+                </tr>
+                <tr>
+                    <td class="num">71.</td>
+                    <td class="entry"><b>On surgery curves for genus one slice knots</b>, <em>Pac. J. Math.</em> 265
+                        (2013), 405&ndash;425. Joint with Patrick M. Gilmer. <a
+                            href="https://arxiv.org/abs/1109.1518">arXiv</a></td>
+                </tr>
+                <tr>
+                    <td class="num">70.</td>
+                    <td class="entry"><b>Non-slice linear combinations of algebraic knots</b>, <em>J. European Math.
+                            Society</em> 14 (2012), issue 4, 1181&ndash;1208. Joint with Matthew Hedden and Paul Kirk.
+                        <a href="https://arxiv.org/abs/0909.1247">arXiv</a>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="num">69.</td>
+                    <td class="entry"><b>Topologically slice knots with nontrivial Alexander polynomial</b>, <em>Adv. in
+                            Math.</em> 231 (2012), 913&ndash;939. Joint with Matt Hedden and Danny Ruberman. <a
+                            href="http://arxiv.org/abs/1001.1538">arXiv</a></td>
+                </tr>
+                <tr>
+                    <td class="num">68.</td>
+                    <td class="entry"><b>The nonorientable four-genus of knots</b>, <em>J. Lond. Math. Soc.</em> (2) 84
+                        (2011), no. 3, 559&ndash;577. Joint with Pat Gilmer. <a
+                            href="https://arxiv.org/abs/1005.5473">arXiv</a></td>
+                </tr>
+                <tr>
+                    <td class="num">67.</td>
+                    <td class="entry"><b>The algebraic concordance order of a knot</b>, <em>J. Knot Theory and its
+                            Ramifications</em> 12 (2011), 1693&ndash;1711. <a
+                            href="https://arxiv.org/abs/0806.3068">arXiv</a></td>
+                </tr>
+                <tr>
+                    <td class="num">66.</td>
+                    <td class="entry"><b>Knot 4-genus and the rank of a class in W(Q(t))</b>, <em>Pac. J. of Math.</em>
+                        (2011), 113&ndash;126. <a href="http://arxiv.org/abs/0912.1022">arXiv</a></td>
+                </tr>
+                <tr>
+                    <td class="num">65.</td>
+                    <td class="entry"><b>Concordance of Bing Doubles and Boundary Genus</b>, <em>Math. Proc. Camb. Phil.
+                            Soc.</em> 151 (2011), 459&ndash;470. Joint with C. Van Cott. <a
+                            href="https://arxiv.org/abs/1009.3164">arXiv</a> <a
+                            href="Livingston_papers/Concordance_of_Bing_Doubles_and_Boundary_Genus.pdf">Reprint</a></td>
+                </tr>
+                <tr>
+                    <td class="num">64.</td>
+                    <td class="entry"><b>The stable 4-genus of knots</b>, <em>Algebraic &amp; Geometric Topology</em> 10
+                        (2010) 2191&ndash;2202. <a href="https://arxiv.org/abs/0904.3054">arXiv</a> <a
+                            href="Livingston_papers/2010_The stable genus of a knot.pdf">Reprint</a></td>
+                </tr>
+                <tr>
+                    <td class="num">63.</td>
+                    <td class="entry"><b>Stabilizing Four-Torsion in Classical Knot Concordance</b>, <em>Topology
+                            Proceedings</em> 37 (2010), 119&ndash;128. Joint with Swatee Naik. <a
+                            href="https://arxiv.org/abs/0908.0005">arXiv</a></td>
+                </tr>
+                <tr>
+                    <td class="num">62.</td>
+                    <td class="entry"><b>Metabelian representations, twisted Alexander polynomials, knot slicing, and
+                            mutation</b>, <em>Mathematische Zeitschrift</em> 265 (2010) 925&ndash;949. Joint with C.
+                        Herald and P. Kirk. <a href="https://arxiv.org/abs/0804.1355">arXiv</a> <a
+                            href="Livingston_papers/2010_Metabelian_representations.pdf">Reprint</a></td>
+                </tr>
+                <tr>
+                    <td class="num">61.</td>
+                    <td class="entry"><b>The geography problem for 4-manifolds with specified fundamental group</b>,
+                        <em>Trans. Amer. Math. Soc.</em> 361 (2009) 4091&ndash;4124. Joint with P. Kirk. <a
+                            href="https://arxiv.org/abs/math/0608103">arXiv</a> <a
+                            href="Livingston_papers/2009_The geography problem for 4-manifolds with specified fundamental group.pdf">Reprint</a>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="num">60.</td>
+                    <td class="entry"><b>The concordance genus of a knot, II</b>, <em>Algebraic &amp; Geometric
+                            Topology</em> 9 (2009) 167&ndash;185. <a href="http://arxiv.org/abs/0807.0765">arXiv</a> <a
+                            href="Livingston_papers/2009_The concordance genus of a knot, II.pdf">Reprint</a></td>
+                </tr>
+                <tr>
+                    <td class="num">59.</td>
+                    <td class="entry"><b>Algebraic and Heegaard-Floer invariants of knots with slice Bing doubles</b>,
+                        <em>Math. Proc. Cambridge Phil. Soc.</em> 144 (2008) 403&ndash;410. Joint with J. C. Cha and D.
+                        Ruberman. <a href="https://arxiv.org/abs/math/0612419">arXiv</a> <a
+                            href="Livingston_papers/2008_Algebraic and Heegaard-Floer invariants of knots with slice Bing doubles.pdf">Reprint</a>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="num">58.</td>
+                    <td class="entry"><b>Concordance Crosscap Numbers of Knots and the Alexander Polynomial</b>,
+                        <em>Proc. Amer. Math. Soc.</em> 136 (2008) 3351&ndash;3353. <a
+                            href="https://arxiv.org/abs/math/0703109">arXiv</a> <a
+                            href="Livingston_papers/2008_Concordance crosscap numbers of knots and the alexander polynomial.pdf">Reprint</a>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="num">57.</td>
+                    <td class="entry"><b>Slice knots with distinct Ozsvath-Szabo and Rasmussen invariants</b>, <em>Proc.
+                            Amer. Math. Soc.</em> 136 (2008) 347&ndash;349. <a
+                            href="https://arxiv.org/abs/math/0602631">arXiv</a> <a
+                            href="Livingston_papers/2008_Slice knots with distinct ozsvath-szabo and rasmussen invariants.pdf">Reprint</a>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="num">56.</td>
+                    <td class="entry"><b>Ozsvath-Szabo and Rasmussen invariants of doubled knots</b>, <em>Alg. and Geom.
+                            Top.</em> 6 (2006) 651&ndash;657. Joint with S. Naik. <a
+                            href="https://arxiv.org/abs/math/0505361">arXiv</a> <a
+                            href="Livingston_papers/2006_Ozsvath-Szabo and Rasmussen invariants  of doubled knots.pdf">Reprint</a>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="num">55.</td>
+                    <td class="entry"><b>Twisted Alexander polynomials of periodic knots</b>, <em>Alg. and Geo.
+                            Topology</em> 6 (2006) 145&ndash;169. Joint with J. Hillman and S. Naik. <a
+                            href="https://arxiv.org/abs/math/0412380">arXiv</a> <a
+                            href="Livingston_papers/2006_Twisted alexander polynomials of periodic knots.pdf">Reprint</a>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="num">54.</td>
+                    <td class="entry"><b>Knot mutation: 4-genus of knots and algebraic concordance</b>, <em>Pac. J. of
+                            Math.</em> 220 (2005) 87&ndash;106. Joint with S. Kim. <a
+                            href="https://arxiv.org/abs/math/0310100">arXiv</a> <a
+                            href="Livingston_papers/2005_Knot mutation.pdf">Reprint</a></td>
+                </tr>
+                <tr>
+                    <td class="num">53.</td>
+                    <td class="entry"><b>A survey of classical knot concordance</b>, <em>The Handbook of Knot
+                            Theory</em> (2005). <a href="https://arxiv.org/abs/math/0307077">arXiv</a></td>
+                </tr>
+                <tr>
+                    <td class="num">52.</td>
+                    <td class="entry"><b>The Hausmann-Weinberger 4-manifold invariant of abelian groups</b>, <em>Proc.
+                            Amer. Math. Soc.</em> 133 (2005) 1537&ndash;1546. Joint with P. Kirk. <a
+                            href="https://arxiv.org/abs/math/0307101">arXiv</a> <a
+                            href="Livingston_papers/2004_The hausmann-weinberger 4-manifold invariant of abelian groups.pdf">Reprint</a>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="num">51.</td>
+                    <td class="entry"><b>Four-manifolds of large negative deficiency</b>, <em>Math. Proc. Camb.</em> 138
+                        (2005) 107&ndash;115. <a href="https://arxiv.org/abs/math/0302026">arXiv</a> <a
+                            href="Livingston_papers/2005_Four-manifolds of large negative deficiency.pdf">Reprint</a>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="num">50.</td>
+                    <td class="entry"><b>Computations of the Ozsvath-Szabo knot concordance invariant</b>, <em>Geo. and
+                            Top.</em> 8 (2004) 735&ndash;742. <a href="https://arxiv.org/abs/math/0311036">arXiv</a>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="num">49.</td>
+                    <td class="entry"><b>Knot signatures are independent</b>, <em>Proc. Amer. Math. Soc.</em> 132 (2004)
+                        2809&ndash;2816. Joint with J. C. Cha. <a href="https://arxiv.org/abs/math/0208225">arXiv</a> <a
+                            href="Livingston_papers/2004_Knot signature functions are independent.pdf">Reprint</a></td>
+                </tr>
+                <tr>
+                    <td class="num">48.</td>
+                    <td class="entry"><b>The concordance genus of knots</b>, <em>Alg. and Geom. Top.</em> 4 (2004)
+                        1&ndash;22. <a href="https://arxiv.org/abs/math/0107141">arXiv</a> <a
+                            href="Livingston_papers/2004_The concordance genus of knots.pdf">Reprint</a></td>
+                </tr>
+                <tr>
+                    <td class="num">47.</td>
+                    <td class="entry"><b>Splitting the concordance group of algebraically slice knots</b>, <em>Geometry
+                            and Topology</em> 7 (2003) 641&ndash;643. <a
+                            href="https://arxiv.org/abs/math/0305363">arXiv</a> <a
+                            href="Livingston_papers/2003_Splitting the concordance group of algebraically slice knots.pdf">Reprint</a>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="num">46.</td>
+                    <td class="entry"><b>Enhanced linking numbers</b>, <em>American Mathematical Monthly</em> 110 (2003)
+                        361&ndash;385. <a
+                            href="Livingston_papers/2003_Enhanced linking numbers_livingston.pdf">Reprint</a></td>
+                </tr>
+                <tr>
+                    <td class="num">45.</td>
+                    <td class="entry"><b>Observations on Lickorish knotting of contractible 4-manifolds</b>, <em>Pac. J.
+                            of Math.</em> 209 (2003) 319&ndash;324. <a
+                            href="https://arxiv.org/abs/math/0111065">arXiv</a> <a
+                            href="Livingston_papers/2003_Observations on Lickorish knotting.pdf">Reprint</a></td>
+                </tr>
+                <tr>
+                    <td class="num">44.</td>
+                    <td class="entry"><b>The slicing number of a knot</b>, <em>Algebraic and Geometric Topology</em> 2
+                        (2002) 1051&ndash;1060. <a href="https://arxiv.org/abs/math/0206072">arXiv</a> <a
+                            href="Livingston_papers/2002_The slicing number of a knot.pdf">Reprint</a></td>
+                </tr>
+                <tr>
+                    <td class="num">43.</td>
+                    <td class="entry"><b>New examples of non-slice, algebraically slice knots</b>, <em>Proc. Amer. Math.
+                            Soc.</em> 130 (2002) 1551&ndash;1555. <a href="https://arxiv.org/abs/math/0007088">arXiv</a>
+                        <a href="Livingston_papers/2002_New examples of non-slice.pdf">Reprint</a>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="num">42.</td>
+                    <td class="entry"><b>Concordance and mutation</b>, <em>Geometry and Topology</em> 5 (2001)
+                        831&ndash;883. Joint with P. Kirk. <a href="https://arxiv.org/abs/math/9912174">arXiv</a></td>
+                </tr>
+                <tr>
+                    <td class="num">41.</td>
+                    <td class="entry"><b>Seifert forms and concordance</b>, <em>Geometry and Topology</em> 6 (2002)
+                        403&ndash;408. <a href="https://arxiv.org/abs/math/0101035">arXiv</a> <a
+                            href="Livingston_papers/2002_Seifert forms and concordance.pdf">Reprint</a></td>
+                </tr>
+                <tr>
+                    <td class="num">40.</td>
+                    <td class="entry"><b>Knot concordance and torsion</b>, <em>Asian Journal of Mathematics</em> 5
+                        (2001) 161&ndash;168. Joint with S. Naik. <a href="https://arxiv.org/abs/math/9911241">arXiv</a>
+                        <a href="Livingston_papers/2001_Knot concordance and torsion.pdf">Reprint</a>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="num">39.</td>
+                    <td class="entry"><b>The Gassner representation for string links</b>, <em>Comm. Cont. Math.</em> 3
+                        (2001) 87&ndash;136. Joint with P. Kirk and Z. Wang. <a
+                            href="https://arxiv.org/abs/math/9806035">arXiv</a></td>
+                </tr>
+                <tr>
+                    <td class="num">38.</td>
+                    <td class="entry"><b>Infinite order amphicheiral knots</b>, <em>Algebraic and Geometric
+                            Topology</em> 1 (2001) 231&ndash;241. <a href="https://arxiv.org/abs/math/9808059">arXiv</a>
+                        <a href="Livingston_papers/2001_Infinite order amphicheiral knots.pdf">Reprint</a>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="num">37.</td>
+                    <td class="entry"><b>Knot invariants in 3-manifolds, essential tori, and the first cohomology of the
+                            free loop space on M</b>, <em>Pacific Journal of Mathematics</em> 197 (2001) 73&ndash;96.
+                        Joint with P. Kirk. <a
+                            href="Livingston_papers/2001_Knot invariants in 3-manifolds and essential tori.pdf">Reprint</a>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="num">36.</td>
+                    <td class="entry"><b>Maps of surface groups to finite groups with no simple loops in the kernel</b>,
+                        <em>Journal of Knot Theory and its Ramifications</em> 9 (2000) 1029&ndash;1036. <a
+                            href="https://arxiv.org/abs/math/0002162">arXiv</a> <a
+                            href="Livingston_papers/2000_Maps of surface groups to finite groups.pdf">Reprint</a>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="num">35.</td>
+                    <td class="entry"><b>Order 2 Algebraically slice knots</b>, <em>Geometry and Topology Monographs II:
+                            Proceedings of the Kirbyfest</em> (1999), 335&ndash;342. <a
+                            href="https://arxiv.org/abs/math/98085059">arXiv</a> <a
+                            href="Livingston_papers/1999_Order 2 algebraically slice knots.pdf">Reprint</a></td>
+                </tr>
+                <tr>
+                    <td class="num">34.</td>
+                    <td class="entry"><b>Obstructing four-torsion in the classical knot concordance group</b>, <em>J.
+                            Diff. Geom.</em> 51 (1999) 1&ndash;12. Joint with S. Naik. <a
+                            href="https://arxiv.org/abs/math/9802071">arXiv</a> <a
+                            href="Livingston_papers/1999_Obstructing four-torsion in the classical knot concordance group.pdf">Reprint</a>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="num">33.</td>
+                    <td class="entry"><b>Twisted knot polynomials: inversion, mutation and concordance</b>,
+                        <em>Topology</em> 38 (1999) 663&ndash;671. Joint with P. Kirk. <a
+                            href="Livingston_papers/1999_Twisted knot polynomials  inversion, mutation and concordance.pdf">Reprint</a>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="num">32.</td>
+                    <td class="entry"><b>Twisted Alexander invariants, Reidemeister torsion, and Casson-Gordon
+                            invariants</b>, <em>Topology</em> 38 (1999) 635&ndash;661. Joint with P. Kirk. <a
+                            href="Livingston_papers/1999_Twisted Alexander invariants, Reidemeister torsion, and Casson-Gordon invariants.pdf">Reprint</a>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="num">31.</td>
+                    <td class="entry"><b>Type 1 invariants in irreducible 3-manifolds</b>, <em>Pac. J. of Math.</em> 183
+                        (1998) 305&ndash;331. Joint with P. Kirk. <a href="1998_Type 1.pdf">Reprint</a></td>
+                </tr>
+                <tr>
+                    <td class="num">30.</td>
+                    <td class="entry"><b>Vassiliev Invariants of two component links and the Casson-Walker
+                            invariant</b>, <em>Topology</em> 36 (1997) 1333&ndash;1353. Joint with P. Kirk. <a
+                            href="Livingston_papers/1997_Vassiliev invariants of two component links and the Casson-Walker invariant_kirk liv.pdf">Reprint</a>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="num">29.</td>
+                    <td class="entry"><b>Embedding punctured lens spaces in four-manifolds</b>, <em>Comment. Math.
+                            Helvetici</em> 71 (1996) 169&ndash;191. Joint with A. Edmonds. <a
+                            href="Livingston_papers/1996_Embedding punctured lens spaces in 4-manifolds.pdf">Reprint</a>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="num">28.</td>
+                    <td class="entry"><b>Knotted symmetric graphs</b>, <em>Proc. Amer. Math. Soc.</em> 123 (1995)
+                        963&ndash;967. <a href="Livingston_papers/1995_Knotted symmetric graphs.pdf">Reprint</a></td>
+                </tr>
+                <tr>
+                    <td class="num">27.</td>
+                    <td class="entry"><b>Lifting knot group representations</b>, <em>Journal of Knot Theory and its
+                            Ramifications</em> 4 (1995) 225&ndash;234. <a
+                            href="Livingston_papers/1995_lifting representations of knot groups.pdf">Reprint</a></td>
+                </tr>
+                <tr>
+                    <td class="num">26.</td>
+                    <td class="entry"><b>The Casson-Gordon invariant and link concordance</b>, <em>Topology</em> 31
+                        (1992) 475&ndash;492. Joint with P. Gilmer. <a
+                            href="Livingston_papers/1992_The Casson-Gordon invariant and link concordance_gil liv.pdf">Reprint</a>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="num">25.</td>
+                    <td class="entry"><b>Discriminants of Casson-Gordon invariants</b>, <em>Math. Proc. Camb. Phil.
+                            Soc.</em> 112 (1992) 127&ndash;139. Joint with P. Gilmer. <a
+                            href="Livingston_papers/1992_Discriminants of Casson-Gordon invariants.pdf">Reprint</a></td>
+                </tr>
+                <tr>
+                    <td class="num">24.</td>
+                    <td class="entry"><b>Exotic dihedral actions on homology 3-spheres</b>, <em>Topology and its
+                            Applications</em> 39 (1991) 153&ndash;158. <a
+                            href="Livingston_papers/1991_Exotic dihedral actions on homology $3$-spheres_liv.pdf">Reprint</a>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="num">23.</td>
+                    <td class="entry"><b>Periodic knots and Maple</b>, <em>Notices of A.M.S.</em> 38 (1991)
+                        785&ndash;788. (Expository article.)</td>
+                </tr>
+                <tr>
+                    <td class="num">22.</td>
+                    <td class="entry"><b>Alexander polynomials of periodic knots</b>, <em>Topology</em> 30 (1991)
+                        551&ndash;564. Joint with J. Davis. <a
+                            href="Livingston_papers/1991_Alexander polynomials of periodic knots_dav liv.pdf">Reprint</a>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="num">21.</td>
+                    <td class="entry"><b>An algebraic concordance group for (p, 2p&minus;1)-links in S(2p+1)</b>,
+                        <em>Proc. Edinburgh Math. Soc.</em> 34 (1991) 455&ndash;462. Joint with P. Gilmer. <a
+                            href="Livingston_papers/1991_An algebraic link concordance group.pdf">Reprint</a>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="num">20.</td>
+                    <td class="entry"><b>Periodic knots, Smith theory and Murasugi&rsquo;s congruence</b>,
+                        <em>L&rsquo;Enseignement Math&eacute;matique</em> 37 (1991) 1&ndash;9. Joint with J. Davis. <a
+                            href="Livingston_papers/1991_Periodic knots, Smith theory and Murasugi's congruence.pdf">Reprint</a>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="num">19.</td>
+                    <td class="entry"><b>Links not concordant to boundary links</b>, <em>Proc. Amer. Math. Soc.</em> 110
+                        (1991) 1129&ndash;1131. <a
+                            href="Livingston_papers/1989_Links not concordant to boundary links.pdf">Reprint</a></td>
+                </tr>
+                <tr>
+                    <td class="num">18.</td>
+                    <td class="entry"><b>Peripherally specified homomorphs of knot groups</b>, <em>Transactions of the
+                            AMS</em> 311 (1989) 135&ndash;146. Joint with D. Johnson. <a
+                            href="Livingston_papers/1989_Peripherally specified homomorphs of knot groups.pdf">Reprint</a>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="num">17.</td>
+                    <td class="entry"><b>The free genus of doubled knots</b>, <em>Proc. Amer. Math. Soc.</em> 104 (1988)
+                        329&ndash;333. <a href="Livingston_papers/1988_The Free Genus of Doubled Knots.pdf">Reprint</a>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="num">16.</td>
+                    <td class="entry"><b>Indecomposable surfaces in 4-space</b>, <em>Pacific J. of Math.</em> 132 (1988)
+                        371&ndash;378. <a
+                            href="Livingston_papers/1988_Indecomposable surfaces in 4-space.pdf">Reprint</a></td>
+                </tr>
+                <tr>
+                    <td class="num">15.</td>
+                    <td class="entry"><b>Knots with finite weight commutator subgroups</b>, <em>Proc. Amer. Math.
+                            Soc.</em> 101 (1987) 195&ndash;198. <a
+                            href="Livingston_papers/1987_Knots with finite weight commutator subgroups.pdf">Reprint</a>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="num">14.</td>
+                    <td class="entry"><b>Companionship and knot group representations</b>, <em>Topology and Its
+                            Applications</em> 25 (1987) 241&ndash;244. <a
+                            href="Livingston_papers/1987_Companionship and knot group representations_liv.pdf">Reprint</a>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="num">13.</td>
+                    <td class="entry"><b>Abelian invariants of satellite knots</b>, <em>Springer Lecture Notes in
+                            Mathematics</em> 1167 (1986) 217&ndash;228. Joint with P. Melvin. <a
+                            href="Livingston_papers/1986_Abelian invariants of satellite knots.pdf">Reprint</a></td>
+                </tr>
+                <tr>
+                    <td class="num">12.</td>
+                    <td class="entry"><b>Inequivalent, bordant group actions on a surface</b>, <em>Math. Proc. Camb.
+                            Phil. Soc.</em> 99 (1986) 233&ndash;238. <a
+                            href="Livingston_papers/1986_Inequivalent bordant group actions on a surface.pdf">Reprint</a>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="num">11.</td>
+                    <td class="entry"><b>Mazur manifolds and wrapping number of knots in
+                            S<sup>1</sup>&times;S<sup>2</sup></b>, <em>Houston J. of Math.</em> (1985) 523&ndash;533. <a
+                            href="Livingston_papers/1985_Mazur manifolds and the wrapping  number of knots.pdf">Reprint</a>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="num">10.</td>
+                    <td class="entry"><b>Stabilizing surface symmetries</b>, <em>Michigan Math. J.</em> 32 (1985)
+                        249&ndash;255. <a href="Livingston_papers/1985_Stablilizing surface symmetries.pdf">Reprint</a>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="num">9.</td>
+                    <td class="entry"><b>Stably irreducible surfaces in S<sup>4</sup></b>, <em>Pacific J. of Math.</em>
+                        116 (1985) 77&ndash;84. <a
+                            href="Livingston_papers/1985_Stably irreducible surfaces in S^4.pdf">Reprint</a></td>
+                </tr>
+                <tr>
+                    <td class="num">8.</td>
+                    <td class="entry"><b>Symmetric representations of knot groups</b>, <em>Topology and Its
+                            Applications</em> 18 (1984) 281&ndash;312. Joint with A. Edmonds. <a
+                            href="Livingston_papers/1984_Symmetric representations of knot groups.pdf">Reprint</a></td>
+                </tr>
+                <tr>
+                    <td class="num">7.</td>
+                    <td class="entry"><b>Group actions on fibered 3-manifolds</b>, <em>Comm. Math. Helv.</em> 58 (1983)
+                        529&ndash;542. Joint with A. Edmonds. <a
+                            href="Livingston_papers/1983_Group actions on fibered 3-manifolds.pdf">Reprint</a></td>
+                </tr>
+                <tr>
+                    <td class="num">6.</td>
+                    <td class="entry"><b>Algebraic knots are algebraically dependent</b>, <em>Proc. Amer. Math.
+                            Soc.</em> 87 (1983) 179&ndash;180. Joint with P. Melvin. <a
+                            href="Livingston_papers/1983_Algebraic knots are algebraically dependent.pdf">Reprint</a>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="num">5.</td>
+                    <td class="entry"><b>Knots which are not concordant to their reverses</b>, <em>Oxford Q. J. of
+                            Math.</em> 34 (1983) 323&ndash;328. <a
+                            href="Livingston_papers/1983_Knots which are not concordant to their reverses.pdf">Reprint</a>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="num">4.</td>
+                    <td class="entry"><b>Embedding 3-manifolds in S<sup>4</sup></b>, <em>Topology</em> 22 (1983)
+                        241&ndash;252. Joint with P. Gilmer. <a
+                            href="Livingston_papers/1983_On embedding $3$-manifolds in $4$-space_gil liv.pdf">Reprint</a>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="num">3.</td>
+                    <td class="entry"><b>More 3-manifolds with multiple knot surgery and branched-cover
+                            descriptions</b>, <em>Math. Proc. Camb. Phil. Soc.</em> 91 (1982) 473&ndash;475. <a
+                            href="Livingston_papers/1982_More 3-manifolds with multiple descriptions.pdf">Reprint</a>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="num">2.</td>
+                    <td class="entry"><b>Surfaces bounding the unlink</b>, <em>Michigan Math. J.</em> 29 (1982)
+                        289&ndash;298. <a href="Livingston_papers/1982_Surfaces bounding the unlink.pdf">Reprint</a>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="num">1.</td>
+                    <td class="entry"><b>Homology cobordisms of 3-manifolds, knot concordances, and prime knots</b>,
+                        <em>Pacific J. of Math.</em> 94 (1981) 193&ndash;206. <a
+                            href="Livingston_papers/1981_Homology cobordisms of 3-manifolds.pdf">Reprint</a>
+                    </td>
+                </tr>
+            </table>
+
+        </section>
+    </div>
+
+</body>
+
+</html>
