@@ -9,6 +9,16 @@
     <link
         href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap"
         rel="stylesheet">
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+        var u = 'livingst', d = 'iu.edu';
+        var el = document.getElementById('email-link');
+        var a = document.createElement('a');
+        a.href = 'mailto:' + u + '@' + d;
+        a.textContent = u + '@' + d;
+        el.appendChild(a);
+        });
+    </script>
     <style>
         :root {
             --crimson: #8B1A1A;
@@ -268,12 +278,13 @@
         </div>
         <div class="info">
             <h1>Charles Livingston</h1>
-            <div class="title-block">
-                Professor Emeritus of Mathematics<br>
-                Indiana University, Bloomington<br>
-                <a href="mailto:livingst@iu.edu">livingst@iu.edu</a>
-            </div>
+                <div class="title-block">
+                    Professor Emeritus of Mathematics<br>
+                    Indiana University, Bloomington<br>
+                    <span id="email-link"></span>
+                </div>
         </div>
+
     </header>
 
     <nav>
